@@ -65,6 +65,9 @@
         ],
         "docker-stop": [
             "docker-compose --project-name sudoku stop"
+        ],
+        "docker-artisan-migrate": [
+            "docker-compose --project-name sudoku exec -T workspace php /var/www/artisan migrate"
         ]
     },
     "config": {

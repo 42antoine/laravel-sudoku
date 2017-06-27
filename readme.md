@@ -1,4 +1,4 @@
-# Create project
+# How this project was created
 
     $> somposer create-project --prefer-dist laravel/laravel sudoku
 
@@ -32,7 +32,7 @@ Personal notes : After updating nodejs, you could have to rebuild node-sass
 
 # Configure database & auth
 
-1/ edit stuff in environment file ".env"
+1/ edit stuff in environment file ".env" (note that .env.example is setting up for docker)
 
 2/ migrate database
 
