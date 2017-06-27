@@ -87,3 +87,32 @@ See also : http://fideloper.com/hexagonal-architecture
     $> composer require xeeeveee/sudoku
 
 See also : https://github.com/xeeeveee/sudoku
+
+# Use docker with laradock
+
+- website : http://127.0.0.1:8004/
+- mysql : http://127.0.0.1:3604
+- mailhog : http://127.0.0.1:8029
+
+## start / stop docker :
+
+    $> docker-compose --project-name sudoku up -d apache2 php-fpm mysql mailhog
+    $> docker-compose --project-name sudoku stop
+
+### shortcuts in composer
+
+    $> composer docker
+    $> composer docker-stop
+
+## unit testing from docker
+
+    $> docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpunit
+    $> docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcs --standard=/var/www/vendor/pragmarx/laravelcs/Standards/Laravel/ app
+    $> docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcpd app
+
+### shortcuts in composer
+    
+    $> composer docker-test
+    $> composer docker-test-phpcs
+    $> composer docker-test-phpcs-duplicated
+

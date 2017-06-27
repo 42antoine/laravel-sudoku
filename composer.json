@@ -50,6 +50,21 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
+        ],
+        "docker-test": [
+            "docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpunit"
+        ],
+        "docker-test-phpcs": [
+            "docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcs --standard=/var/www/vendor/pragmarx/laravelcs/Standards/Laravel/ app"
+        ],
+        "docker-test-phpcs-duplicated": [
+            "docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcpd app"
+        ],
+        "docker": [
+            "docker-compose --project-name sudoku up -d apache2 php-fpm mysql mailhog"
+        ],
+        "docker-stop": [
+            "docker-compose --project-name sudoku stop"
         ]
     },
     "config": {
