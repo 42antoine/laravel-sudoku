@@ -92,6 +92,12 @@ See also : https://github.com/xeeeveee/sudoku
 
 # Use docker with laradock to run the project
 
+## Prepare the environment file to work with docker
+
+    $> cp .env.example .env
+
+The docker containers are set to be use from this 127.0.0.1:SPECIFI_PORT on localhost
+
 - website : http://127.0.0.1:8004
 - mysql : http://127.0.0.1:3604
 - mailhog : http://127.0.0.1:8029
