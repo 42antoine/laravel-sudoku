@@ -72,19 +72,33 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-	public function frontendIndexDisplaySudokuView()
-	{
+	public function frontendIndexDisplaySudokuView(RequestAbstract $request) {
+
 		// Puzzle size
 		$cellSize = 12;
 
+		if ($request->has('cell_size'))
+		{
+			$cellSize = $request->has('cell_size');
+		}
+
 		$puzzle = $this->generatePuzzleFromConstraints($cellSize);
+
+		/*
+		 * Register puzzle
+		 */
+
+		$sudoku = $this->create([
+			'user_id'  => \Auth::user()->id,
+			'puzzle'   => $puzzle->getPuzzle(),
+			'solution' => $puzzle->getSolution(),
+		]);
 
 		return view(
 			'frontend.sudoku.index',
 			[
-				'thePuzzle'   => $puzzle->getPuzzle(),
-				'theSolution' => $puzzle->getSolution(),
-				'isSolvable'  => $puzzle->isSolvable()
+				'thePuzzle'   => $sudoku->puzzle,
+				'theSolution' => $sudoku->solution,
 			]
 		);
 	}
@@ -94,8 +108,7 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	 *
 	 * @return Puzzle
 	 */
-	protected function generatePuzzleFromConstraints($cellSize)
-	{
+	protected function generatePuzzleFromConstraints($cellSize) {
 		// Is the puzzle solvable ?
 		$isSolvable = false;
 
@@ -103,7 +116,8 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 		$puzzle = new Puzzle();
 
 		// Execute until a resolvable puzzle is generated
-		do {
+		do
+		{
 
 			// Create new puzzle
 			$puzzle->generatePuzzle($cellSize);
