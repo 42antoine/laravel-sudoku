@@ -103,11 +103,15 @@
 
                 <div class="panel-footer">
 
-                    <button type="submit" class="btn btn-primary">Finish later</button>
-
+                    <span class="pull-left">
+                        <button type="submit" class="btn btn-primary">Finish later</button>
+                        <a class="btn btn-link" href="{{ url('/sudoku') }}">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help me, give me one number
+                        </a>
+                    </span>
                     <span class="pull-right">
                         <a class="btn btn-link" href="{{ url('/sudoku') }}">
-                            Try another sudoku
+                            <i class="fa fa-refresh" aria-hidden="true"></i> Try another sudoku
                         </a>
                         <button type="submit" class="btn btn-primary">Check your solution</button>
                     </span>
