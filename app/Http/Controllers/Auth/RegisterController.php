@@ -27,7 +27,7 @@ class RegisterController extends ControllerAbstract
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/sudoku';
 
     /**
      * Create a new controller instance.
