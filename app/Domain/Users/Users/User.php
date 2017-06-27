@@ -29,4 +29,24 @@ class User extends AuthenticatableModelAbstract
         'password',
 		'remember_token',
     ];
+
+	/**
+	 * Get the sudokus record associated with the user.
+	 */
+	public function sudokus()
+	{
+		return $this->hasMany(
+			\sudoku\Domain\Sudokus\Sudokus\Sudoku::class
+		);
+	}
+
+	/**
+	 * Get the settlements record associated with the user.
+	 */
+	public function settlements()
+	{
+		return $this->hasMany(
+			\sudoku\Domain\Sudokus\Settlements\Settlement::class
+		);
+	}
 }

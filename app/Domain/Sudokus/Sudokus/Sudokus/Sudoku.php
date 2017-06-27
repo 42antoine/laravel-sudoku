@@ -13,7 +13,9 @@ class Sudoku extends ModelAbstract
 	 * @var array
 	 */
 	protected $fillable = [
-
+		'user_id',
+		'puzzle',
+		'solution',
 	];
 
 	/**
@@ -24,4 +26,14 @@ class Sudoku extends ModelAbstract
 	protected $hidden = [
 
 	];
+
+	/**
+	 * Get the user record associated with the sudoku.
+	 */
+	public function user()
+	{
+		return $this->belongsTo(
+			\sudoku\Domain\Users\Users\User::class
+		);
+	}
 }
