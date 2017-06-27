@@ -10,7 +10,7 @@
         "laravel/tinker": "~1.0",
         "league/fractal": "^0.16.0",
         "prettus/l5-repository": "^2.6",
-        "xeeeveee/sudoku": "^0.2.1"
+        "xeeeveee/sudoku": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^2.3",

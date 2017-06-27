@@ -2,6 +2,7 @@
 
 namespace sudoku\Domain\Sudokus\Sudokus\Repositories;
 
+use Xeeeveee\Sudoku\Puzzle;
 use sudoku\Infrastructure\Contracts\
 {
 	Repositories\RepositoryEloquentAbstract,
@@ -66,5 +67,52 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 		parent::delete($sudoku->id);
 
 		return $sudoku;
+	}
+
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function frontendIndexDisplaySudokuView()
+	{
+		// Puzzle size
+		$cellSize = 12;
+
+		$puzzle = $this->generatePuzzleFromConstraints($cellSize);
+
+		return view(
+			'frontend.sudoku.index',
+			[
+				'thePuzzle'   => $puzzle->getPuzzle(),
+				'theSolution' => $puzzle->getSolution(),
+				'isSolvable'  => $puzzle->isSolvable()
+			]
+		);
+	}
+
+	/**
+	 * @param $cellSize
+	 *
+	 * @return Puzzle
+	 */
+	protected function generatePuzzleFromConstraints($cellSize)
+	{
+		// Is the puzzle solvable ?
+		$isSolvable = false;
+
+		// New puzzle
+		$puzzle = new Puzzle();
+
+		// Execute until a resolvable puzzle is generated
+		do {
+
+			// Create new puzzle
+			$puzzle->generatePuzzle($cellSize);
+
+			// Get the solution and check it
+			$isSolvable = $puzzle->isSolvable();
+
+		} while (false === $isSolvable);
+
+		return $puzzle;
 	}
 }

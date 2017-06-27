@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c26921e59557c15017a4b2e777a665b3",
+    "content-hash": "3ebb6b5deb352eab7b9b45d72c19df34",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2051,16 +2051,16 @@
         },
         {
             "name": "xeeeveee/sudoku",
-            "version": "0.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xeeeveee/sudoku.git",
-                "reference": "7be2cf125cebab16d78e6ad16bf8aaae0d76c6f3"
+                "reference": "ba23aa2fe33bb4a8a0447c58f58d3830aaea3451"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xeeeveee/sudoku/zipball/7be2cf125cebab16d78e6ad16bf8aaae0d76c6f3",
-                "reference": "7be2cf125cebab16d78e6ad16bf8aaae0d76c6f3",
+                "url": "https://api.github.com/repos/xeeeveee/sudoku/zipball/ba23aa2fe33bb4a8a0447c58f58d3830aaea3451",
+                "reference": "ba23aa2fe33bb4a8a0447c58f58d3830aaea3451",
                 "shasum": ""
             },
             "require-dev": {
@@ -2092,7 +2092,7 @@
                 "solving",
                 "sudoku"
             ],
-            "time": "2015-11-17T23:09:53+00:00"
+            "time": "2016-03-02T23:25:16+00:00"
         }
     ],
     "packages-dev": [
@@ -4118,7 +4118,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "xeeeveee/sudoku": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
