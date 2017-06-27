@@ -107,7 +107,7 @@
 
                     <span class="pull-right">
                         <a class="btn btn-link" href="{{ url('/sudoku') }}">
-                            Reset
+                            Try another sudoku
                         </a>
                         <button type="submit" class="btn btn-primary">Check your solution</button>
                     </span>

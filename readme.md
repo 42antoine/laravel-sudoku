@@ -125,3 +125,12 @@ The docker containers are set to be use from this 127.0.0.1:SPECIFI_PORT on loca
     $> composer docker-test
     $> composer docker-test-phpcs
     $> composer docker-test-phpcs-duplicated
+
+# Sudoku commands
+
+    $> php artisan help sudoku:resolve
+    $> php artisan sudoku:resolve <path to file with sudoku as raw format>
+    
+    $> php artisan sudoku:resolve storage/tests/sudoku_easy.txt
+    $> php artisan sudoku:resolve storage/tests/sudoku_medium.txt
+    $> php artisan sudoku:resolve storage/tests/sudoku_hard.txt
