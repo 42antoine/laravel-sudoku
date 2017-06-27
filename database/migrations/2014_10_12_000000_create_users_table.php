@@ -14,10 +14,6 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-
-        	// Prevent errors on MySQL < 5.7
-			Schema::defaultStringLength(191);
-
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
