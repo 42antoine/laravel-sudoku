@@ -71,17 +71,19 @@ class UsersRepositoryEloquent extends RepositoryEloquentAbstract implements User
 	 * Delete user and fire event "UserDeletedEvent".
 	 *
 	 * @param array   $attributes
-	 * @param integer $id
+	 * @param integer $user_id
 	 *
 	 * @event sudoku\Domain\Users\Users\Events\UserDeletedEvent
-	 * @return int
+	 * @return \sudoku\Domain\Users\Users\User
 	 */
-	public function delete($id) {
-		$user = $this->find($id);
+	public function delete($user_id) {
+		$user = $this->find($user_id);
+
+		parent::delete($user->id);
 
 		event(new UserDeletedEvent($user));
 
-		return parent::delete($user->id);
+		return $user;
 	}
 
 	/**
