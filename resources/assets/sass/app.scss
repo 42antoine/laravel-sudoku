@@ -9,3 +9,25 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+table.sudoku_grid {
+  margin:1em auto;
+}
+table.sudoku_grid td {
+  height:30px;
+  width:30px;
+  border:1px solid;
+  text-align:center;
+}
+table.sudoku_grid td:first-child {
+  border-left:solid;
+}
+table.sudoku_grid td:nth-child(3n) {
+  border-right:solid ;
+}
+table.sudoku_grid tr:first-child {
+  border-top:solid;
+}
+table.sudoku_grid tr:nth-child(3n) td {
+  border-bottom:solid ;
+}

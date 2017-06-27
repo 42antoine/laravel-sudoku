@@ -23,7 +23,7 @@ class SudokuIndexFormRequest extends RequestAbstract
 	 */
 	public function rules() {
 		$rules = [
-			'cell_size' => 'required|in:5,15,25',
+			'cell_size' => 'in:5,15,25',
 		];
 
 		return $rules;

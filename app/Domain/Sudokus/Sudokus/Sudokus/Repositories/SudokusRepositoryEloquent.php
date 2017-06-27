@@ -2,7 +2,7 @@
 
 namespace sudoku\Domain\Sudokus\Sudokus\Repositories;
 
-use Xeeeveee\Sudoku\Puzzle;
+use sudoku\Domain\Sudokus\Puzzles\Repositories\Puzzle;
 use sudoku\Infrastructure\Contracts\
 {
 	Repositories\RepositoryEloquentAbstract,
@@ -75,11 +75,11 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	public function frontendIndexDisplaySudokuView(RequestAbstract $request) {
 
 		// Puzzle size
-		$cellSize = 12;
+		$cellSize = 5;
 
 		if ($request->has('cell_size'))
 		{
-			$cellSize = $request->has('cell_size');
+			$cellSize = (int) $request->get('cell_size');
 		}
 
 		$puzzle = $this->generatePuzzleFromConstraints($cellSize);
@@ -90,15 +90,17 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 
 		$sudoku = $this->create([
 			'user_id'  => \Auth::user()->id,
-			'puzzle'   => $puzzle->getPuzzle(),
-			'solution' => $puzzle->getSolution(),
+			'puzzle'   => $puzzle->getPuzzleAsJson(),
+			'solution' => $puzzle->getSolutionAsJson(),
 		]);
 
 		return view(
 			'frontend.sudoku.index',
 			[
-				'thePuzzle'   => $sudoku->puzzle,
-				'theSolution' => $sudoku->solution,
+				'thePuzzle'        => $sudoku->puzzle_collection,
+				'theSolution'      => $sudoku->solution_collection,
+				'isSolvable'       => $puzzle->isSolvable(),
+				'selectedCellSize' => $cellSize,
 			]
 		);
 	}
@@ -126,6 +128,8 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 			$isSolvable = $puzzle->isSolvable();
 
 		} while (false === $isSolvable);
+
+		$puzzle->solve();
 
 		return $puzzle;
 	}
