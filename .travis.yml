@@ -11,6 +11,8 @@ env:
 before_install:
   - docker-compose --project-name sudoku up -d apache2 php-fpm mysql mailhog
   - docker ps -a
+  - docker-compose --project-name sudoku exec -T workspace composer install
+  - docker-compose --project-name sudoku exec -T workspace php /var/www/artisan migrate
 
 script:
   - docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpunit
