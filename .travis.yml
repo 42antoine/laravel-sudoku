@@ -9,6 +9,7 @@ env:
   - DOCKER_COMPOSE_VERSION=1.11.2
 
 before_install:
+  - cp .env.example .env
   - docker-compose --project-name sudoku up -d apache2 php-fpm mysql mailhog
   - docker ps -a
   - docker-compose --project-name sudoku exec -T workspace composer install
