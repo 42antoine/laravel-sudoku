@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -8,32 +8,32 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use sudoku\Domain\Users\Users\User;
 
-class HomePageTest extends TestCase
+class LoginControllerTest extends TestCase
 {
 
 	/**
-	 * A basic test example to access home page.
+	 * A basic test example to access login page.
 	 *
 	 * @return void
 	 */
-	public function testTryToAccessHomePageAsGuest() {
-		$response = $this->get('/');
+	public function testTryToAccessLoginPageAsGuest() {
+		$response = $this->get('/login');
 
 		$response->assertStatus(200);
 	}
 
 	/**
-	 * An advanced test example to access home page.
+	 * An advanced test example to access login page.
 	 *
 	 * @return void
 	 */
-	public function testTryToAccessHomePageAsLoggedInUser() {
+	public function testTryToAccessLoginPageAsLoggedInUser() {
 		$user = factory(User::class)->create();
 
 		$response = $this
 			->actingAs($user)
-			->get('/');
+			->get('/login');
 
-		$response->assertStatus(200);
+		$response->assertStatus(302);
 	}
 }

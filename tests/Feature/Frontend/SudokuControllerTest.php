@@ -10,13 +10,13 @@ use sudoku\Domain\Users\Users\User;
 
 class SudokuControllerTest extends TestCase
 {
+
 	/**
 	 * A basic test example to access sudoku page.
 	 *
 	 * @return void
 	 */
-	public function testTryToAccessSudokuPageAsGuest()
-	{
+	public function testTryToAccessSudokuPageAsGuest() {
 		$response = $this->get('/sudoku');
 
 		$response->assertStatus(302);
@@ -27,8 +27,7 @@ class SudokuControllerTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function testTryToAccessSudokuPageAsLoggedInUser()
-	{
+	public function testTryToAccessSudokuPageAsLoggedInUser() {
 		$user = factory(User::class)->create();
 
 		$response = $this
