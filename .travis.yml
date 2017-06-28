@@ -1,0 +1,18 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.11.2
+
+before_install:
+  - docker-compose --project-name sudoku up -d apache2 php-fpm mysql mailhog
+  - docker ps -a
+
+script:
+  - docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpunit
+  - docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcs --standard=/var/www/vendor/pragmarx/laravelcs/Standards/Laravel/ app
+  - docker-compose --project-name sudoku exec -T workspace /var/www/vendor/bin/phpcpd app
