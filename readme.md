@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/42antoine/laravel-sudoku.svg?branch=master)](https://travis-ci.org/42antoine/laravel-sudoku)
+
 # How this project was created
 
     $> somposer create-project --prefer-dist laravel/laravel sudoku
