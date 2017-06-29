@@ -11,6 +11,21 @@ use sudoku\Domain\Users\Users\User;
 class ResetPasswordControllerTest extends TestCase
 {
 
+	/**
+	 * A basic test example to access home page
+	 *
+	 * xABE : HERE TO AVOID WARNING.
+	 *
+	 * @deprecated HERE TO AVOID WARNING.
+	 *
+	 * @return void
+	 */
+	public function testTryToAccessHomePageAsGuest() {
+		$response = $this->get('/');
+
+		$response->assertStatus(200);
+	}
+
 //	/**
 //	 * A basic test example to access sudoku page.
 //	 *

@@ -2,7 +2,8 @@
 
 namespace sudoku\Domain\Sudokus\Sudokus\Repositories;
 
-use sudoku\Domain\Sudokus\Puzzles\Repositories\Puzzle;
+use Illuminate\Foundation\Application;
+use sudoku\Domain\Sudokus\Puzzles\Factories\PuzzlesFactory;
 use sudoku\Infrastructure\Contracts\
 {
 	Repositories\RepositoryEloquentAbstract,
@@ -16,6 +17,26 @@ use sudoku\Domain\Sudokus\Sudokus\
 
 class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements SudokusRepositoryInterface
 {
+
+	/**
+	 * @var null|PuzzlesFactory
+	 */
+	protected $f_puzzles = null;
+
+	/**
+	 * SudokusRepositoryEloquent constructor.
+	 *
+	 * @param Application       $application
+	 * @param PuzzlesFactory $r_puzzles
+	 */
+	public function __construct(
+		Application $application,
+		PuzzlesFactory $f_puzzles
+	) {
+		parent::__construct($application);
+
+		$this->f_puzzles = $f_puzzles;
+	}
 
 	/**
 	 * Specify Model class name
@@ -79,7 +100,8 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 
 		if ($request->has('cell_size'))
 		{
-			$cellSize = (int) $request->get('cell_size');
+			// str to int - in 5, 15, 25
+			$cellSize = intval($request->get('cell_size'));
 		}
 
 		$puzzle = $this->generatePuzzleFromConstraints($cellSize);
@@ -108,14 +130,13 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	/**
 	 * @param $cellSize
 	 *
-	 * @return Puzzle
+	 * @return \sudoku\Domain\Sudokus\Puzzles\Repositories\PuzzlesRepository
 	 */
 	protected function generatePuzzleFromConstraints($cellSize) {
 		// Is the puzzle solvable ?
 		$isSolvable = false;
 
-		// New puzzle
-		$puzzle = new Puzzle();
+		$puzzle = $this->f_puzzles->createNewPuzzleRepository();
 
 		// Execute until a resolvable puzzle is generated
 		do
