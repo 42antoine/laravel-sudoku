@@ -27,6 +27,9 @@ class PuzzlesTest extends TestCase
 	 */
 	protected $f_puzzles = null;
 
+	/**
+	 * PuzzlesTest constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -62,6 +65,7 @@ class PuzzlesTest extends TestCase
 	 * @return void
 	 */
 	public function testCheckBaseGenerationOfAPuzzle() {
+		// Generate a new puzzle in repository
 		$this->r_puzzles->generatePuzzle();
 
 		$this

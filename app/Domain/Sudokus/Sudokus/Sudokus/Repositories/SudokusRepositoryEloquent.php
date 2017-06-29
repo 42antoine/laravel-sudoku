@@ -2,7 +2,7 @@
 
 namespace sudoku\Domain\Sudokus\Sudokus\Repositories;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Container\Container as Application;
 use sudoku\Domain\Sudokus\Puzzles\Factories\PuzzlesFactory;
 use sudoku\Infrastructure\Contracts\
 {
@@ -128,11 +128,14 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	}
 
 	/**
-	 * @param $cellSize
+	 * Get a new PuzzlesRepository from PuzzlesFactory then generate the
+	 * solvable puzzle, solve it and return it.
+	 *
+	 * @param integer $cellSize default 15
 	 *
 	 * @return \sudoku\Domain\Sudokus\Puzzles\Repositories\PuzzlesRepository
 	 */
-	protected function generatePuzzleFromConstraints($cellSize) {
+	protected function generatePuzzleFromConstraints($cellSize = 15) {
 		// Is the puzzle solvable ?
 		$isSolvable = false;
 
