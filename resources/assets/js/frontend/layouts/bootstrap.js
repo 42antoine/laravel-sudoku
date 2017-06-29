@@ -16,8 +16,8 @@ try {
  * just a simple convenience so we don't have to attach every token manually.
  */
 
-var environment = $('meta[name="environment"]').attr('content');
-var token = $('meta[name="csrf-token"]').attr('content');
+let environment = $('meta[name="environment"]').attr('content');
+let token = $('meta[name="csrf-token"]').attr('content');
 
 if (token) {
 	$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': token } });

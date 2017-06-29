@@ -1,30 +1,32 @@
 @extends('layouts.app')
 
+@section('js')
+    <script src="{{ mix('js/index.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Settings
-                </div>
-                <div class="panel-body">
-                    <form role="form" method="GET" action="{{ url('/sudoku') }}">
-                        {{ csrf_field() }}
+                <form role="form" method="GET" action="{{ url('/sudoku') }}">
+                    {{ csrf_field() }}
+                    <div class="panel-heading">
+                        Settings
+                    </div>
+                    <div class="panel-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Difficulty</label>
                             {{ Form::select('cell_size', ['25' => 'Easy', '15' => 'Medium', '5' => 'Hard'], $selectedCellSize, ["style" => "width:100%"]) }}
                         </div>
-                        <div class="form-group">
-                            <div class="">
-                                <button type="submit" class="btn btn-primary">Apply</button>
-                                <a class="btn btn-link" href="{{ url('/sudoku') }}">
-                                    Reset
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                        <a class="btn btn-link" href="{{ url('/sudoku') }}">
+                            Reset
+                        </a>
+                    </div>
+                </form>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -60,24 +62,33 @@
                     <div class="row">
                         <div class="col-md-2">&nbsp;</div>
                         <div class="col-md-8">
-                            @include('frontend.sudoku.partials.sudoku_grid', ['thePuzzle' => $thePuzzle, 'theSolution' => $theSolution])
-                            <div class="pull-center" style="text-align: center;">
-                                <a class="btn btn-link" href="javascript:void(0);" id="js-sudoku-help">
-                                    <i class="fa fa-life-ring" aria-hidden="true"></i> Help me, give me one number <span class="js-sudoku-help-remaining-help">( 3 )</span>
-                                </a>
+
+                            <div id="js-react-sudoku-error_message" class="pull-center" style="text-align:center;display:none;">
+                                <div class="alert alert-danger" role="alert">This is not the good solution, try again !</div>
                             </div>
+
+                            <div id="js-react-sudoku-success_message" class="pull-center" style="text-align:center;display:none;">
+                                <div class="alert alert-success" role="alert">You did it !</div>
+                            </div>
+
+                            @include('frontend.sudoku.partials.sudoku_grid', ['thePuzzle' => $thePuzzle, 'theSolution' => $theSolution])
+
+                            {{--<div id="js-react-sudoku-help" class="pull-center" style="text-align: center;"> Todo xABE show help ReactJs </div>--}}
+
                         </div>
                         <div class="col-md-2">&nbsp;</div>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <span class="pull-left">
-                        {{--<button type="submit" class="btn btn-primary">Finish later</button>--}}
-                    </span>
-                    <span class="pull-right">
+
                         <a class="btn btn-link" href="{{ url('/sudoku') }}">
                             <i class="fa fa-refresh" aria-hidden="true"></i> Try another sudoku
                         </a>
+
+                        {{--<button type="submit" class="btn btn-primary">Finish later</button>--}}
+                    </span>
+                    <span class="pull-right">
                         <a href="javascript:void(0);" class="btn btn-primary" id="js-sudoku-submit-sudoku-check-solution">Check your solution</a>
                     </span>
                     <div class="clearfix"></div>

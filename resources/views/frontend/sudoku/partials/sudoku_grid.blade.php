@@ -1,4 +1,4 @@
-<table width="100%" border="1" class="sudoku_grid">
+<table width="100%" border="1" id="js-sudoku_grid" class="sudoku_grid">
 
 	@foreach ($thePuzzle as $key_row => $row)
 

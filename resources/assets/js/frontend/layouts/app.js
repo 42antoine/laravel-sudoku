@@ -7,6 +7,16 @@
 
 require('./bootstrap');
 
-$(function () {
-	$('[data-toggle="tooltip"]').tooltip()
-});
+/*
+ * Sudoku App
+ */
+(function ($, W, D) {
+
+	/**
+	 * Execute when document ready
+	 */
+	$(D).ready(function () {
+		$(D).trigger('APP_READY');
+	});
+
+})(jQuery, window, document);
