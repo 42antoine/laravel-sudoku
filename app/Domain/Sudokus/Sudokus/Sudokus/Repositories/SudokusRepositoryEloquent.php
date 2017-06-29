@@ -26,7 +26,7 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	/**
 	 * SudokusRepositoryEloquent constructor.
 	 *
-	 * @param Application       $application
+	 * @param Application    $application
 	 * @param PuzzlesFactory $r_puzzles
 	 */
 	public function __construct(
@@ -120,7 +120,9 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 			'frontend.sudoku.index',
 			[
 				'thePuzzle'        => $sudoku->puzzle_collection,
+				'thePuzzleAsRaw'   => $sudoku->puzzle,
 				'theSolution'      => $sudoku->solution_collection,
+				'theSolutionAsRaw' => $sudoku->solution,
 				'isSolvable'       => $puzzle->isSolvable(),
 				'selectedCellSize' => $cellSize,
 			]
