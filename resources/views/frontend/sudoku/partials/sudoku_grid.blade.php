@@ -8,12 +8,12 @@
 
 				@if (0 === $column)
 					<td align="center" style="vertical-align: middle;" height="35px">
-						<input type="text" style="width: 100%; padding:10px;" name="sudoky_column[{{ $key_row }}][{{ $key_column }}]" data-key_row="{{ $key_row }}" data-key_column="{{ $key_column }}" data-value="{{ $column }}" data-solution="{{ $theSolution->get($key_row)[$key_column] }}">
+						<input type="text" style="width: 100%; padding:10px;" name="sudoku_column[{{ $key_row }}][{{ $key_column }}]" data-key_row="{{ $key_row }}" data-key_column="{{ $key_column }}" data-value="{{ $column }}" data-solution="{{ $theSolution->get($key_row)[$key_column] }}" value="{{ $theSolution->get($key_row)[$key_column] }}">
 					</td>
 				@else
 					<td align="center" style="vertical-align: middle;background-color:lightblue;" height="35px">
 						{{ $column }}
-						<input type="hidden" name="sudoky_column[{{ $key_row }}][{{ $key_column }}]" value="{{ $column }}" data-key_row="{{ $key_row }}" data-key_column="{{ $key_column }}" data-value="{{ $column }}" data-solution="{{ $column }}">
+						<input type="hidden" name="sudoku_column[{{ $key_row }}][{{ $key_column }}]" value="{{ $column }}" data-key_row="{{ $key_row }}" data-key_column="{{ $key_column }}" data-value="{{ $column }}" data-solution="{{ $column }}">
 					</td>
 				@endif
 

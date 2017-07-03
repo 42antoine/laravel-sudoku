@@ -40,10 +40,9 @@
 			var isSolved = true;
 
 			$('#js-sudoku_grid')
-				.find('input[type="text"][name^="sudoky_column"]')
+				.find('input[type="text"][name^="sudoku_column"]')
 				.each(function () {
-					if ($(this).val() !== $(this).data()) {
-						_sudoku.validate_grid.display_error_message();
+					if (Number($(this).val()) !== Number($(this).data('solution'))) {
 						isSolved = false;
 						return;
 					}
@@ -51,6 +50,9 @@
 
 			if (isSolved) {
 				_sudoku.validate_grid.display_success_message();
+			}
+			else {
+				_sudoku.validate_grid.display_error_message();
 			}
 		},
 		/**
@@ -65,11 +67,7 @@
 			window
 				.setTimeout(
 					function () {
-						success_message
-							.fadeTo(200, 0)
-							.slideUp(500, function () {
-								$(this).hide();
-							});
+						success_message.hide();
 					},
 					8000
 				);
@@ -86,11 +84,7 @@
 			window
 				.setTimeout(
 					function () {
-						error_message
-							.fadeTo(200, 0)
-							.slideUp(500, function () {
-								$(this).hide();
-							});
+						error_message.hide();
 					},
 					8000
 				);
