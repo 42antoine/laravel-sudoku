@@ -3,6 +3,11 @@
 namespace sudoku\Console\Commands\Sudokus;
 
 use Illuminate\Console\Command;
+use sudoku\Domain\Sudokus\Puzzles\
+{
+	Factories\PuzzlesFactory
+};
+use sudoku\Domain\Sudokus\Resolvers\Factories\ResolversFactory;
 
 class ResolveSudokuFromRawFormatInFileCommand extends Command
 {
@@ -29,11 +34,37 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 	protected $description = 'Resolve a sudoku from a file (raw format)';
 
 	/**
+	 * @var null|PuzzlesFactory
+	 */
+	protected $f_puzzle = null;
+
+	/**
+	 * @var null|ResolversFactory
+	 */
+	protected $f_resolver = null;
+
+	/**
+	 * ResolveSudokuFromRawFormatInFileCommand constructor.
+	 *
+	 * @param PuzzlesFactory $f_puzzle
+	 */
+	public function __construct(
+		PuzzlesFactory $f_puzzle,
+		ResolversFactory $f_resolver
+	) {
+		parent::__construct();
+
+		$this->f_puzzle = $f_puzzle;
+		$this->f_resolver = $f_resolver;
+	}
+
+	/**
 	 * Execute command.
 	 */
 	public function fire() {
 
-		try {
+		try
+		{
 
 			$file_path = $this->argument('file');
 
@@ -43,9 +74,49 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 			}
 
 			$file_content = \File::get($file_path);
+			$file_content_as_json = json_decode($file_content);
 
-			$this->info($file_content);
+			/*
+			 * First solution with Xeeeveee\Sudoku\Puzzle package
+			 */
 
+			$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
+
+			$puzzle = $this->f_puzzle->createNewPuzzleRepository();
+			$puzzle->setPuzzle($file_content_as_json);
+
+			if ($puzzle->isSolvable())
+			{
+				$puzzle->solve();
+				$puzzle
+					->getSolutionAsCollection()
+					->each(function($line, $row) {
+						$this->info(implode(' | ', $line));
+						if (8 !== $row)
+						{
+							$this->info('---------------------------------');
+						}
+					});
+			}
+
+			/*
+			 * Second solution with HomeMade package
+			 */
+
+			$this->info(PHP_EOL);
+			$this->info('Second solution with HomeMade package');
+
+			$resolver = $this->f_resolver->createNewResolverRepository();
+			$resolver->setPuzzle($file_content_as_json);
+			$resolver
+				->getSolutionAsCollection()
+				->each(function($line, $row) {
+					$this->info(implode(' | ', $line));
+					if (8 !== $row)
+					{
+						$this->info('---------------------------------');
+					}
+				});
 		}
 		catch (\Symfony\Component\Console\Exception\RuntimeException $exception)
 		{
