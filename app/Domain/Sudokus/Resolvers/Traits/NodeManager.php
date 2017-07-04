@@ -7,6 +7,17 @@ use sudoku\Domain\Sudokus\Resolvers\
 	PuzzleCompartmentNode
 };
 
+/**
+ * Trait NodeManager
+ * @package sudoku\Domain\Sudokus\Resolvers\Traits
+ *
+ * xABE : Do not forget to add following constance in class that use this trait
+ *
+ * const PUZZLE_NB_LINE = 9;
+ * const PUZZLE_NB_COLUMN = 9;
+ * const PUZZLE_MIN_VALUE = 1;
+ * const PUZZLE_MAX_VALUE = 9;
+ */
 trait NodeManager
 {
 
