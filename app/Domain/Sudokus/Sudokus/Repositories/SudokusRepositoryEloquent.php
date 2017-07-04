@@ -98,10 +98,19 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 		// Puzzle size
 		$cellSize = 25;
 
+		// Complete fields with solution
+		$showSolution = false;
+
 		if ($request->has('cell_size'))
 		{
 			// str to int - in 5, 15, 25
 			$cellSize = intval($request->get('cell_size'));
+		}
+
+		if ($request->has('show_solution'))
+		{
+			// str to bool - true or false
+			$showSolution = boolval($request->get('show_solution'));
 		}
 
 		$puzzle = $this->generatePuzzleFromConstraints($cellSize);
@@ -125,6 +134,7 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 				'theSolutionAsRaw' => $sudoku->solution,
 				'isSolvable'       => $puzzle->isSolvable(),
 				'selectedCellSize' => $cellSize,
+				'showSolution'     => $showSolution,
 			]
 		);
 	}

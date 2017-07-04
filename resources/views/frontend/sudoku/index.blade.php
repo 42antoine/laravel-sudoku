@@ -9,15 +9,20 @@
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
-                <form role="form" method="GET" action="{{ url('/sudoku') }}">
-                    {{ csrf_field() }}
                     <div class="panel-heading">
                         Settings
                     </div>
+                <form role="form" method="GET" action="{{ url('/sudoku') }}">
+                    {{ csrf_field() }}
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Difficulty</label>
                             {{ Form::select('cell_size', ['25' => 'Easy', '15' => 'Medium', '5' => 'Hard'], $selectedCellSize, ["style" => "width:100%"]) }}
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                {{ Form::checkbox('show_solution', 1, old('show_solution', $showSolution)) }} Show solution
+                            </label>
                         </div>
                     </div>
                     <div class="panel-footer">
