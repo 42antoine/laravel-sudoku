@@ -14,7 +14,7 @@ trait NodePuzzleBacktracking
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function getSolutionPuzzleAsCollection() {
-		$this->runBatracking();
+		$this->runBacktracking();
 
 		return $this->solutionAsCollection();
 	}
@@ -22,7 +22,7 @@ trait NodePuzzleBacktracking
 	/**
 	 *
 	 */
-	protected function runBatracking() {
+	protected function runBacktracking() {
 
 	}
 
