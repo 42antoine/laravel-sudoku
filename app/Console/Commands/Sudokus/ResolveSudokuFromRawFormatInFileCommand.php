@@ -83,33 +83,24 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 			$puzzle = $this->f_puzzle->createNewPuzzleRepository();
 			$puzzle->setPuzzle($file_content_as_json);
 
-			$puzzle
-				->getPuzzleAsCollection()
-				->each(function($line, $row) {
-					$this->info(implode(' | ', $line));
-					if (8 !== $row)
-					{
-						$this->info('---------------------------------');
-					}
-				});
+			$this->info('Empty puzzle');
+			$this
+				->displayGrid(
+					$puzzle->getPuzzleAsCollection()
+				);
 			$this->info(PHP_EOL);
 
+			if ($puzzle->isSolvable())
+			{
+				$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
 
-//			if ($puzzle->isSolvable())
-//			{
-//				$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
-//
-//				$puzzle->solve();
-//				$puzzle
-//					->getSolutionAsCollection()
-//					->each(function($line, $row) {
-//						$this->info(implode(' | ', $line));
-//						if (8 !== $row)
-//						{
-//							$this->info('---------------------------------');
-//						}
-//					});
-//			}
+				$puzzle->solve();
+
+				$this
+					->displayGrid(
+						$puzzle->getSolutionAsCollection()
+					);
+			}
 
 			/*
 			 * Second solution with HomeMade package
@@ -120,15 +111,11 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 
 			$resolver = $this->f_resolver->createNewResolverRepository();
 			$resolver->setPuzzle($file_content_as_json);
-			$resolver
-				->getSolutionAsCollection()
-				->each(function($line, $row) {
-					$this->info(implode(' | ', $line));
-					if (8 !== $row)
-					{
-						$this->info('---------------------------------');
-					}
-				});
+
+			$this
+				->displayGrid(
+					$resolver->getSolutionAsCollection()
+				);
 		}
 		catch (\Symfony\Component\Console\Exception\RuntimeException $exception)
 		{
@@ -138,5 +125,20 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 		{
 			$this->error($exception->getMessage());
 		}
+	}
+
+	/**
+	 * @param \Illuminate\Support\Collection $collection
+	 */
+	protected function displayGrid(\Illuminate\Support\Collection $collection) {
+		$collection
+			->each(function($line, $row)
+			{
+				$this->info(implode(' | ', $line));
+				if (8 !== $row)
+				{
+					$this->info('---------------------------------');
+				}
+			});
 	}
 }
