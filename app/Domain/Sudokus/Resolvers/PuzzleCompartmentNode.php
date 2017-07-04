@@ -256,4 +256,76 @@ class PuzzleCompartmentNode
 	public function getBottomNodeInGrid() {
 		return $this->grid_bottom_node;
 	}
+
+	/**
+	 * @param PuzzleCompartmentNode $subgrid_left_node
+	 *
+	 * @return $this
+	 */
+	public function setLeftNodeInSubGrid(PuzzleCompartmentNode &$subgrid_left_node) {
+		$this->subgrid_left_node = $subgrid_left_node;
+
+		return $this;
+	}
+
+	/**
+	 * @return null|PuzzleCompartmentNode
+	 */
+	public function getLeftNodeInSubGrid() {
+		return $this->subgrid_left_node;
+	}
+
+	/**
+	 * @param PuzzleCompartmentNode $subgrid_top_node
+	 *
+	 * @return $this
+	 */
+	public function setTopNodeInSubGrid(PuzzleCompartmentNode &$subgrid_top_node) {
+		$this->subgrid_top_node = $subgrid_top_node;
+
+		return $this;
+	}
+
+	/**
+	 * @return null|PuzzleCompartmentNode
+	 */
+	public function getTopNodeInSubGrid() {
+		return $this->subgrid_top_node;
+	}
+
+	/**
+	 * @param PuzzleCompartmentNode $subgrid_right_node
+	 *
+	 * @return $this
+	 */
+	public function setRightNodeInSubGrid(PuzzleCompartmentNode &$subgrid_right_node) {
+		$this->subgrid_right_node = $subgrid_right_node;
+
+		return $this;
+	}
+
+	/**
+	 * @return null|PuzzleCompartmentNode
+	 */
+	public function getRightNodeInSubGrid() {
+		return $this->subgrid_right_node;
+	}
+
+	/**
+	 * @param PuzzleCompartmentNode $subgrid_bottom_node
+	 *
+	 * @return $this
+	 */
+	public function setBottomNodeInSubGrid(PuzzleCompartmentNode &$subgrid_bottom_node) {
+		$this->subgrid_bottom_node = $subgrid_bottom_node;
+
+		return $this;
+	}
+
+	/**
+	 * @return null|PuzzleCompartmentNode
+	 */
+	public function getBottomNodeInSubGrid() {
+		return $this->subgrid_bottom_node;
+	}
 }

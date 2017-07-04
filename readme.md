@@ -2,7 +2,7 @@
 
 # How this project was created
 
-    $> somposer create-project --prefer-dist laravel/laravel sudoku
+    $> composer create-project --prefer-dist laravel/laravel sudoku
 
 ## Remove Laravel vueJS, Axios and Lodash components
 

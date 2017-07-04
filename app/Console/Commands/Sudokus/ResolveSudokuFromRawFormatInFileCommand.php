@@ -80,24 +80,36 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 			 * First solution with Xeeeveee\Sudoku\Puzzle package
 			 */
 
-			$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
-
 			$puzzle = $this->f_puzzle->createNewPuzzleRepository();
 			$puzzle->setPuzzle($file_content_as_json);
 
-			if ($puzzle->isSolvable())
-			{
-				$puzzle->solve();
-				$puzzle
-					->getSolutionAsCollection()
-					->each(function($line, $row) {
-						$this->info(implode(' | ', $line));
-						if (8 !== $row)
-						{
-							$this->info('---------------------------------');
-						}
-					});
-			}
+			$puzzle
+				->getPuzzleAsCollection()
+				->each(function($line, $row) {
+					$this->info(implode(' | ', $line));
+					if (8 !== $row)
+					{
+						$this->info('---------------------------------');
+					}
+				});
+			$this->info(PHP_EOL);
+
+
+//			if ($puzzle->isSolvable())
+//			{
+//				$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
+//
+//				$puzzle->solve();
+//				$puzzle
+//					->getSolutionAsCollection()
+//					->each(function($line, $row) {
+//						$this->info(implode(' | ', $line));
+//						if (8 !== $row)
+//						{
+//							$this->info('---------------------------------');
+//						}
+//					});
+//			}
 
 			/*
 			 * Second solution with HomeMade package
