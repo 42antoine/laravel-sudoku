@@ -13,7 +13,6 @@
                         Settings
                     </div>
                 <form role="form" method="GET" action="{{ url('/sudoku') }}">
-                    {{ csrf_field() }}
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Difficulty</label>
