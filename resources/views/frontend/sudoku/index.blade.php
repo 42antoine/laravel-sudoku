@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Difficulty</label>
-                            {{ Form::select('cell_size', ['25' => 'Easy', '15' => 'Medium', '5' => 'Hard'], $selectedCellSize, ["style" => "width:100%"]) }}
+                            {{ Form::select('cell_size', ['5' => 'Easy', '15' => 'Medium', '25' => 'Hard'], $selectedCellSize, ["style" => "width:100%"]) }}
                         </div>
                         <div class="checkbox">
                             <label>

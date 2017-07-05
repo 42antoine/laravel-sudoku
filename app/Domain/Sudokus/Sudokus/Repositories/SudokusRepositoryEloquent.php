@@ -96,7 +96,7 @@ class SudokusRepositoryEloquent extends RepositoryEloquentAbstract implements Su
 	public function frontendIndexDisplaySudokuView(RequestAbstract $request) {
 
 		// Puzzle size
-		$cellSize = 25;
+		$cellSize = 5;
 
 		// Complete fields with solution
 		$showSolution = false;
