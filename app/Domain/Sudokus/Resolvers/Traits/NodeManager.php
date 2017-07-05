@@ -73,13 +73,16 @@ trait NodeManager
 
 		$this->validateBasicsOfThisPuzzle();
 
+		// xABE Todo : Optimize position calculation
+		$position = 1;
+
 		$this
 			->puzzle
-			->each(function($row, $row_number)
+			->each(function($row, $row_number) use (&$position)
 			{
 
 				collect($row)
-					->each(function($compartment_value, $column_number) use ($row_number)
+					->each(function($compartment_value, $column_number) use ($row_number, &$position)
 					{
 
 						$current_row_number = $row_number + 1;
@@ -94,6 +97,9 @@ trait NodeManager
 								$current_column_number,
 								($compartment_value !== 0) // lock if value
 							);
+
+						// xABE Todo : Optimize position calculation
+						$current_node->setPosition($position);
 
 						$this
 							->setOrientationOfNewNode(
@@ -110,6 +116,7 @@ trait NodeManager
 						}
 
 						$this->puzzleNodesStack->push($current_node);
+						$position++;
 					});
 			});
 
@@ -297,7 +304,27 @@ trait NodeManager
 	 * @param integer $subgrid_id [1-9]
 	 */
 	public function displayPuzzleSubGrid($subgrid_id) {
+		$this
+			->applyClosureOnNodesSubGridStartingByFirstNodeInSubGrid(
+				$subgrid_id,
+				function(PuzzleCompartmentNode $node)
+				{
+					echo $node->getValue();
+					echo(is_null($node->getRightNodeInSubGrid()) ? PHP_EOL : '');
+				}
+			);
+	}
 
+	/**
+	 * Help method to walk through nodes in subgrid mode.
+	 *
+	 * @param integer  $subgrid_id
+	 * @param \Closure $callable
+	 */
+	protected function applyClosureOnNodesSubGridStartingByFirstNodeInSubGrid(
+		$subgrid_id,
+		\Closure $callable
+	) {
 		$current_node = null;
 
 		$coordinates = collect([
@@ -323,10 +350,7 @@ trait NodeManager
 
 		do
 		{
-
-			echo $parent_subgrid_node->getValue();
-			echo(is_null($parent_subgrid_node->getRightNodeInSubGrid()) ? PHP_EOL : '');
-
+			$callable($parent_subgrid_node);
 		} while (($parent_subgrid_node = $parent_subgrid_node->getRightNodeInSubGrid()) instanceof PuzzleCompartmentNode);
 	}
 

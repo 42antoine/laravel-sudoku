@@ -94,12 +94,18 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 			{
 				$this->info('First solution with Xeeeveee\Sudoku\Puzzle package');
 
+				$rustart = getrusage();
+
 				$puzzle->solve();
 
 				$this
 					->displayGrid(
 						$puzzle->getSolutionAsCollection()
 					);
+
+				$ru = getrusage();
+				$this->info("This process used " . $this->rutime($ru, $rustart, "utime") . " ms for its computations");
+				$this->info("It spent " . $this->rutime($ru, $rustart, "stime") . " ms in system calls");
 			}
 
 			/*
@@ -112,10 +118,16 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 			$resolver = $this->f_resolver->createNewResolverRepository();
 			$resolver->setPuzzle($file_content_as_json);
 
+			$rustart = getrusage();
+
 			$this
 				->displayGrid(
 					$resolver->getSolutionAsCollection()
 				);
+
+			$ru = getrusage();
+			$this->info("This process used " . $this->rutime($ru, $rustart, "utime") . " ms for its computations");
+			$this->info("It spent " . $this->rutime($ru, $rustart, "stime") . " ms in system calls");
 		}
 		catch (\Symfony\Component\Console\Exception\RuntimeException $exception)
 		{
@@ -140,5 +152,17 @@ class ResolveSudokuFromRawFormatInFileCommand extends Command
 					$this->info('---------------------------------');
 				}
 			});
+	}
+
+	/**
+	 * @param $ru
+	 * @param $rus
+	 * @param $index
+	 *
+	 * @return mixed
+	 */
+	protected function rutime($ru, $rus, $index) {
+		return ($ru["ru_$index.tv_sec"]*1000 + intval($ru["ru_$index.tv_usec"]/1000))
+			-  ($rus["ru_$index.tv_sec"]*1000 + intval($rus["ru_$index.tv_usec"]/1000));
 	}
 }

@@ -15,6 +15,11 @@ class PuzzleCompartmentNode
 	 */
 	protected $isValueLocked = false;
 
+	/**
+	 * @var int
+	 */
+	protected $position = 0;
+
 	/*
 	 * The Grid could be display as a simple line (no line, no row)
 	 */
@@ -133,6 +138,24 @@ class PuzzleCompartmentNode
 	 */
 	public function setValue($value) {
 		$this->value = $value;
+	}
+
+	/**
+	 * xABE Todo : Optimize position calculation
+	 *
+	 * @return int
+	 */
+	public function getPosition() {
+		return $this->position;
+	}
+
+	/**
+	 * xABE Todo : Optimize position calculation
+	 *
+	 * @param integer $value
+	 */
+	public function setPosition($position) {
+		$this->position = $position;
 	}
 
 	/**

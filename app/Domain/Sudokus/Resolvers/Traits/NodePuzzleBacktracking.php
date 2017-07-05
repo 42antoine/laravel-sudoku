@@ -64,17 +64,31 @@ trait NodePuzzleBacktracking
 					$node->getNextNodeInline()
 				);
 		}
+		else if (
+			$node->isValueLocked()
+			&& is_null($node->getNextNodeInline())
+		)
+		{
+
+			/*
+			 * End of puzzle grid, we did it!
+			 */
+
+			return true;
+		}
 
 		collect(range(1, 9))
 			->each(function($value) use ($node, &$returnValue)
 			{
-				$coordinate = ($node->getGridX() + ($node->getGridY() - 1)) * 9;
+
+				// xABE Todo : Optimize position calculation
+				$position_in_grid = $node->getPosition(); // ($node->getGridX() * 9) + ($node->getGridY());
 
 				$subgrid = $this
 					->subgrids
-					->filter(function($item) use ($coordinate)
+					->filter(function($item) use ($position_in_grid)
 					{
-						return $item->containsStrict($coordinate)
+						return $item->containsStrict($position_in_grid)
 							? $item
 							: null;
 					})
@@ -97,9 +111,6 @@ trait NodePuzzleBacktracking
 						 */
 
 						$returnValue = true;
-
-						// break;
-						return false;
 					}
 					else if ($node->getNextNodeInline() instanceof PuzzleCompartmentNode)
 					{
@@ -107,7 +118,10 @@ trait NodePuzzleBacktracking
 							->runBacktracking(
 								$node->getNextNodeInline()
 							);
+					}
 
+					if ($returnValue)
+					{
 						// break;
 						return false;
 					}
@@ -132,6 +146,18 @@ trait NodePuzzleBacktracking
 	public function isValueExistOnRow($value, $row) {
 		$valueExists = false;
 
+		$this
+			->applyClosureOnNodesRowsStartingByFirstNodeInRow(
+				$row,
+				function(PuzzleCompartmentNode $node) use ($value, &$valueExists)
+				{
+					if ($value === $node->getValue())
+					{
+						$valueExists = true;
+					}
+				}
+			);
+
 		return $valueExists;
 	}
 
@@ -144,6 +170,18 @@ trait NodePuzzleBacktracking
 	public function isValueExistOnColumn($value, $column) {
 		$valueExists = false;
 
+		$this
+			->applyClosureOnNodesColumnStartingByFirstNodeInColumn(
+				$column,
+				function(PuzzleCompartmentNode $node) use ($value, &$valueExists)
+				{
+					if ($value === $node->getValue())
+					{
+						$valueExists = true;
+					}
+				}
+			);
+
 		return $valueExists;
 	}
 
@@ -155,6 +193,18 @@ trait NodePuzzleBacktracking
 	 */
 	public function isValueExistOnSubGrid($value, $subgrid) {
 		$valueExists = false;
+
+		$this
+			->applyClosureOnNodesSubGridStartingByFirstNodeInSubGrid(
+				$subgrid,
+				function(PuzzleCompartmentNode $node) use ($value, &$valueExists)
+				{
+					if ($value === $node->getValue())
+					{
+						$valueExists = true;
+					}
+				}
+			);
 
 		return $valueExists;
 	}
