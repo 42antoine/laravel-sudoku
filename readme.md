@@ -2,13 +2,17 @@
 
 # Sudoku project, interview tests
 
+
+![banner](https://raw.githubusercontent.com/42antoine/laravel-sudoku/master/sudokubanner.png)
+
+
 ## How this project was created
 
     $> composer create-project --prefer-dist laravel/laravel sudoku
 
 ### Remove Laravel vueJS, Axios and Lodash components
 
-Please follow instruciton here : https://mattstauffer.co/blog/removing-all-vue-dependencies-from-laravel
+Please follow instruction here : https://mattstauffer.co/blog/removing-all-vue-dependencies-from-laravel
 
 Then, add token and environment utilities for jQuery, look at the following file :
 
@@ -119,7 +123,7 @@ See also : https://github.com/xeeeveee/sudoku
 
     $> cp .env.example .env
 
-The docker containers are set to be use from this 127.0.0.1:SPECIFI_PORT on localhost
+The docker containers are set to be use from this 127.0.0.1:SPECIFIC_PORT on localhost
 
 - website : http://127.0.0.1:8004
 - mysql : http://127.0.0.1:3604
@@ -159,6 +163,74 @@ The docker containers are set to be use from this 127.0.0.1:SPECIFI_PORT on loca
     $> php artisan sudoku:resolve storage/tests/sudoku_hard.json
     $> php artisan sudoku:resolve storage/tests/sudoku_impose_1.json
     $> php artisan sudoku:resolve storage/tests/sudoku_impose_2.json
+
+### Output example
+
+    $> php artisan sudoku:resolve storage/tests/sudoku_impose_1.json
+    .
+    Empty puzzle
+    0 | 7 | 6 | 0 | 1 | 0 | 0 | 4 | 3
+    ---------------------------------
+    0 | 0 | 0 | 7 | 0 | 2 | 9 | 0 | 0
+    ---------------------------------
+    0 | 9 | 0 | 0 | 0 | 6 | 0 | 0 | 0
+    ---------------------------------
+    0 | 0 | 0 | 0 | 6 | 3 | 2 | 0 | 4
+    ---------------------------------
+    4 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 9
+    ---------------------------------
+    1 | 0 | 5 | 4 | 2 | 0 | 0 | 0 | 0
+    ---------------------------------
+    0 | 0 | 0 | 2 | 0 | 0 | 0 | 9 | 0
+    ---------------------------------
+    0 | 0 | 4 | 8 | 0 | 7 | 0 | 0 | 1
+    ---------------------------------
+    9 | 1 | 0 | 0 | 5 | 0 | 7 | 2 | 0
+    
+    
+    .
+    First solution with Xeeeveee\Sudoku\Puzzle package
+    2 | 7 | 6 | 9 | 1 | 5 | 8 | 4 | 3
+    ---------------------------------
+    3 | 4 | 1 | 7 | 8 | 2 | 9 | 6 | 5
+    ---------------------------------
+    5 | 9 | 8 | 3 | 4 | 6 | 1 | 7 | 2
+    ---------------------------------
+    7 | 8 | 9 | 1 | 6 | 3 | 2 | 5 | 4
+    ---------------------------------
+    4 | 6 | 2 | 5 | 7 | 8 | 3 | 1 | 9
+    ---------------------------------
+    1 | 3 | 5 | 4 | 2 | 9 | 6 | 8 | 7
+    ---------------------------------
+    8 | 5 | 7 | 2 | 3 | 1 | 4 | 9 | 6
+    ---------------------------------
+    6 | 2 | 4 | 8 | 9 | 7 | 5 | 3 | 1
+    ---------------------------------
+    9 | 1 | 3 | 6 | 5 | 4 | 7 | 2 | 8
+    This process used 1 ms for its computations
+    It spent 1 ms in system calls
+    
+    .
+    Second solution with HomeMade package
+    2 | 7 | 6 | 9 | 1 | 5 | 8 | 4 | 3
+    ---------------------------------
+    3 | 4 | 1 | 7 | 8 | 2 | 9 | 6 | 5
+    ---------------------------------
+    5 | 9 | 8 | 3 | 4 | 6 | 1 | 7 | 2
+    ---------------------------------
+    7 | 8 | 9 | 1 | 6 | 3 | 2 | 5 | 4
+    ---------------------------------
+    4 | 6 | 2 | 5 | 7 | 8 | 3 | 1 | 9
+    ---------------------------------
+    1 | 3 | 5 | 4 | 2 | 9 | 6 | 8 | 7
+    ---------------------------------
+    8 | 5 | 7 | 2 | 3 | 1 | 4 | 9 | 6
+    ---------------------------------
+    6 | 2 | 4 | 8 | 9 | 7 | 5 | 3 | 1
+    ---------------------------------
+    9 | 1 | 3 | 6 | 5 | 4 | 7 | 2 | 8
+    This process used 36 ms for its computations
+    It spent 0 ms in system calls
 
 ## About the logo
 
