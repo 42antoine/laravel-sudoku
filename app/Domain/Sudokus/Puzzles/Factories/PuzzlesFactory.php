@@ -13,8 +13,7 @@ class PuzzlesFactory
 	/**
 	 * @return PuzzlesRepository
 	 */
-	public function createNewPuzzleRepository()
-	{
+	public function createNewPuzzleRepository() {
 		return app()->make(PuzzlesRepository::class);
 	}
 }

@@ -13,8 +13,7 @@ class ResolversFactory
 	/**
 	 * @return ResolversRepository
 	 */
-	public function createNewResolverRepository()
-	{
+	public function createNewResolverRepository() {
 		return app()->make(ResolversRepository::class);
 	}
 }

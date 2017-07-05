@@ -34,8 +34,7 @@ class Sudoku extends ModelAbstract
 	 *
 	 * @return \Illuminate\Support\Collection
 	 */
-	public function getPuzzleCollectionAttribute()
-	{
+	public function getPuzzleCollectionAttribute() {
 		return collect(json_decode($this->puzzle));
 	}
 
@@ -46,16 +45,14 @@ class Sudoku extends ModelAbstract
 	 *
 	 * @return \Illuminate\Support\Collection
 	 */
-	public function getSolutionCollectionAttribute()
-	{
+	public function getSolutionCollectionAttribute() {
 		return collect(json_decode($this->solution));
 	}
 
 	/**
 	 * Get the user record associated with the sudoku.
 	 */
-	public function user()
-	{
+	public function user() {
 		return $this->belongsTo(
 			\sudoku\Domain\Users\Users\User::class
 		);

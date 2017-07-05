@@ -4,7 +4,8 @@ namespace sudoku\Http\Controllers\Frontend;
 
 use sudoku\Infrastructure\Contracts\Controllers\ControllerAbstract;
 use sudoku\Domain\Sudokus\Sudokus\Repositories\SudokusRepositoryEloquent;
-use sudoku\Http\Request\Frontend\Sudokus\{
+use sudoku\Http\Request\Frontend\Sudokus\
+{
 	SudokuIndexFormRequest
 };
 

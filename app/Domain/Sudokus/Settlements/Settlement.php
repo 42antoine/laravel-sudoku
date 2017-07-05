@@ -34,8 +34,7 @@ class Settlement extends ModelAbstract
 	/**
 	 * Get the user record associated with the settlements.
 	 */
-	public function user()
-	{
+	public function user() {
 		return $this->belongsTo(
 			\sudoku\Domain\Users\Users\User::class
 		);
@@ -44,8 +43,7 @@ class Settlement extends ModelAbstract
 	/**
 	 * Get the sudoku record associated with the settlements.
 	 */
-	public function sudoku()
-	{
+	public function sudoku() {
 		return $this->belongsTo(
 			\sudoku\Domain\Sudokus\Sudokus\Sudoku::class
 		);

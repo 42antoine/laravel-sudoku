@@ -129,6 +129,13 @@ class PuzzleCompartmentNode
 	}
 
 	/**
+	 * @param integer $value
+	 */
+	public function setValue($value) {
+		$this->value = $value;
+	}
+
+	/**
 	 * @return int
 	 */
 	public function isValueLocked() {

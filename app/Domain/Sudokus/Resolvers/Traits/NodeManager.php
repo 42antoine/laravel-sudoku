@@ -137,7 +137,7 @@ trait NodeManager
 						if (
 							is_null($current_node->getRightNodeInSubGrid())
 							&& (
-							(
+								(
 									// Identify the previous compartment on same row
 									$current_node->getGridY() % 3 !== 0
 									&& $node->getGridX() === $current_node->getGridX()
@@ -221,7 +221,7 @@ trait NodeManager
 			 */
 			$previous_node->setNextNodeInline($current_node);
 
-			if (1 !== $current_column_number && 0 !== $previous_row_number)
+			if (1 !== $current_column_number && 0 !== $previous_column_number)
 			{
 				$previous_node->setRightNodeInGrid($current_node);
 			}

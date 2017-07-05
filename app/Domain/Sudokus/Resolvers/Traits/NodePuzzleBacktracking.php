@@ -11,19 +11,152 @@ trait NodePuzzleBacktracking
 {
 
 	/**
+	 * @var null|\Illuminate\Support\Collection
+	 */
+	protected $subgrids = null;
+
+	/**
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function getSolutionPuzzleAsCollection() {
-		$this->runBacktracking();
+
+		if (81 !== $this->puzzleNodesStack->count())
+		{
+			throw new \Exception('Impossible to resolve puzzle, grid not complete!');
+		}
+
+		$this->subgrids = collect([
+			1 => collect([1, 2, 3, 10, 11, 12, 19, 20, 21]),
+			2 => collect([4, 5, 6, 13, 14, 15, 22, 23, 24]),
+			3 => collect([7, 8, 9, 16, 17, 18, 25, 26, 27]),
+			4 => collect([28, 29, 30, 37, 38, 39, 46, 47, 48]),
+			5 => collect([31, 32, 33, 40, 41, 42, 49, 50, 51]),
+			6 => collect([34, 35, 36, 43, 44, 45, 52, 53, 54]),
+			7 => collect([55, 56, 57, 64, 65, 66, 73, 74, 75]),
+			8 => collect([58, 59, 60, 67, 68, 69, 76, 77, 78]),
+			9 => collect([61, 62, 63, 70, 71, 72, 79, 80, 81]),
+		]);
+
+		if (!$this->runBacktracking($this->root_node))
+		{
+			throw new \Exception('Unable to solve the puzzle');
+		}
 
 		return $this->solutionAsCollection();
 	}
 
 	/**
+	 * @param PuzzleCompartmentNode $node
 	 *
+	 * @return bool
 	 */
-	protected function runBacktracking() {
+	protected function runBacktracking(PuzzleCompartmentNode $node) {
 
+		$returnValue = false;
+
+		if (
+			$node->isValueLocked()
+			&& $node->getNextNodeInline() instanceof PuzzleCompartmentNode
+		)
+		{
+			return $this
+				->runBacktracking(
+					$node->getNextNodeInline()
+				);
+		}
+
+		collect(range(1, 9))
+			->each(function($value) use ($node, &$returnValue)
+			{
+				$coordinate = ($node->getGridX() + ($node->getGridY() - 1)) * 9;
+
+				$subgrid = $this
+					->subgrids
+					->filter(function($item) use ($coordinate)
+					{
+						return $item->containsStrict($coordinate)
+							? $item
+							: null;
+					})
+					->keys()
+					->first();
+
+				if (
+					!$this->isValueExistOnRow($value, $node->getGridX())
+					&& !$this->isValueExistOnColumn($value, $node->getGridY())
+					&& !$this->isValueExistOnSubGrid($value, $subgrid)
+				)
+				{
+					$node->setValue($value);
+
+					if (is_null($node->getNextNodeInline()))
+					{
+
+						/*
+						 * End of puzzle grid, we did it!
+						 */
+
+						$returnValue = true;
+
+						// break;
+						return false;
+					}
+					else if ($node->getNextNodeInline() instanceof PuzzleCompartmentNode)
+					{
+						$returnValue = $this
+							->runBacktracking(
+								$node->getNextNodeInline()
+							);
+
+						// break;
+						return false;
+					}
+				}
+			});
+
+		// No working solution, reset the node value and step back
+		if (false === $returnValue)
+		{
+			$node->setValue(0);
+		}
+
+		return $returnValue;
+	}
+
+	/**
+	 * @param $value
+	 * @param $row
+	 *
+	 * @return bool
+	 */
+	public function isValueExistOnRow($value, $row) {
+		$valueExists = false;
+
+		return $valueExists;
+	}
+
+	/**
+	 * @param $value
+	 * @param $column
+	 *
+	 * @return bool
+	 */
+	public function isValueExistOnColumn($value, $column) {
+		$valueExists = false;
+
+		return $valueExists;
+	}
+
+	/**
+	 * @param $value
+	 * @param $subgrid
+	 *
+	 * @return bool
+	 */
+	public function isValueExistOnSubGrid($value, $subgrid) {
+		$valueExists = false;
+
+		return $valueExists;
 	}
 
 	/**
@@ -33,7 +166,8 @@ trait NodePuzzleBacktracking
 		$solution = collect();
 
 		collect(range(1, 9))
-			->each(function($row) use ($solution) {
+			->each(function($row) use ($solution)
+			{
 
 				$row_values = [];
 
