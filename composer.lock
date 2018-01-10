@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "561187fc658b84eec5f79b6230e3f9b1",
+    "content-hash": "361de6d9946f3a19601bd579497e5421",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -904,16 +904,16 @@
         },
         {
             "name": "prettus/l5-repository",
-            "version": "2.6.18",
+            "version": "2.6.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andersao/l5-repository.git",
-                "reference": "5fbab77b9f295f0c3d2bb1f8b1e42f6ff0affad7"
+                "reference": "201039ad9bc03f722a8d904535bb375812ae267e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andersao/l5-repository/zipball/5fbab77b9f295f0c3d2bb1f8b1e42f6ff0affad7",
-                "reference": "5fbab77b9f295f0c3d2bb1f8b1e42f6ff0affad7",
+                "url": "https://api.github.com/repos/andersao/l5-repository/zipball/201039ad9bc03f722a8d904535bb375812ae267e",
+                "reference": "201039ad9bc03f722a8d904535bb375812ae267e",
                 "shasum": ""
             },
             "require": {
@@ -934,6 +934,11 @@
             "extra": {
                 "branch-alias": {
                     "dev-develop": "2.2-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Prettus\\Repository\\Providers\\RepositoryServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -960,7 +965,7 @@
                 "model",
                 "repository"
             ],
-            "time": "2017-03-29T10:49:41+00:00"
+            "time": "2017-12-14T15:57:36+00:00"
         },
         {
             "name": "prettus/laravel-validation",
